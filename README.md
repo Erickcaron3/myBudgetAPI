@@ -1,13 +1,14 @@
 # myBudgetAPI
 RestAPI version of application myBudget  
-Project 
+Project currently in development for a personal usage
 
 # Technologies
 
 Java/Spring boot/Hibernate, database mySQL, RestAPI.  
 Lombok.  
 
-To be implemented: Microservices (Eureka), RabbitMQ  
+To be implemented: at least: Microservices (Eureka), RabbitMQ, JavaMail.
+
 Frontend in independant application: JavaScript/CSS/HTML
 
 # Endpoints
