@@ -8,10 +8,10 @@ Java/Spring boot/Hibernate, database mySQL, RestAPI.
 Lombok.  
 
 To be implemented: Microservices (Eureka), RabbitMQ  
-Frontend: JavaScript/CSS/HTML
+Frontend in independant application: JavaScript/CSS/HTML
 
 # Endpoints
-/currencies
-/shops
-/users
-/expenses
+/currencies  
+/shops  
+/users  
+/expenses  
