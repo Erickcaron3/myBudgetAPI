@@ -20,7 +20,7 @@ import java.util.List;
 public class CurrencyController {
 
     @Autowired
-    private final CurrencyService currencyService;
+    private CurrencyService currencyService;
 
     @GetMapping
     public List<Currency> findAll() {

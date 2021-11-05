@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @AllArgsConstructor
 
@@ -53,13 +54,13 @@ public class ShopServiceImpl implements ShopService {
 
     public void isShopInputCorrect(Shop shop) {
         if (shop.getCategory() != null && shop.getName() != null) {
-            for (Shop shopFromDB : shopRepository.findAll()) {
-                if (shopFromDB.getName().equals(shop.getName())) {
-                    throw new ResourceException(ResourceError.INCORRECT_INPUT);
-                }
+            if (shopRepository.findAll().stream()
+                    .anyMatch(Predicate.isEqual(shop.getName()))) {
+                throw new ResourceException(ResourceError.INCORRECT_INPUT);
             }
         }
     }
+
 
     @Override
     public void delete(Shop shop) {
@@ -94,3 +95,4 @@ public class ShopServiceImpl implements ShopService {
     }
 
 }
+
