@@ -2,12 +2,12 @@
 <configuration>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <patternLayout pattern="%-30d %p %-30.30C: %nsg%n%throwable"/>
+            <patternLayout pattern="%-30d %p [%t] %-30.30C: %msg%n%throwable"/>
         </Console>
         <RollingFile name="File" fileName="./logs/app-log4j2.log"
                      filePattern="./logs/app-%d{-dd-MMMM-yyyy}-%i.log4j2.log.gz">
             <PatternLayout>
-                <pattern>%d %p [%t] %C: %nsg%n%throwable</pattern>
+                <pattern>%d %p [%t] %C: %msg%n%throwable</pattern>
             </PatternLayout>
             <Policies>
                 <OnStartUpTriggeringPolicy/>
