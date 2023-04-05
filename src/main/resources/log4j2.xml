@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <patternLayout pattern="%-30d %p %-30.30C: %nsg%n%throwable"/>
+        </Console>
+        <RollingFile name="File" fileName="./logs/app-log4j2.log"
+                     filePattern="./logs/app-%d{-dd-MMMM-yyyy}-%i.log4j2.log.gz">
+            <PatternLayout>
+                <pattern>%d %p [%t] %C: %nsg%n%throwable</pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartUpTriggeringPolicy/>
+                <SizeBasedTriggerPolicy size="10MB"/>
+                <TimeBasedTriggerPolicy/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <root level="INFO">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="File"/>
+        </root>
+        <logger name="net.erickcaron.mybudgetapi" level="DEBUG">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="File"/>
+        </logger>
+    </Loggers>
+</configuration>

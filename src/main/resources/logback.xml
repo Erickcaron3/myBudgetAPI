@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">%-30(%d %p) %30.30([%t] %C): %nsg%n%throwable</layout>
+    </appender>
+
+    <appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/app-logback.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p [%t] %C: %nsg%n%throwable</Pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>logs/archived/app-%d{yyyy-MM-dd}.%i-logback.log</fileNamePattern>
+        <TimeBasedFileNamingAndTriggerPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+            <maxFileSIze>10MB</maxFileSIze>
+        </TimeBasedFileNamingAndTriggerPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="File"/>
+        <appender-ref ref="Console"/>
+    </root>
+    <logger name="net.erickcaron.mybudgetapi" level="DEBUG" additivity="false">
+        <appender-ref ref="File"/>
+        <appender-ref ref="Console"/>
+    </logger>
+</configuration>
