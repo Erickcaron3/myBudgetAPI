@@ -1,4 +1,4 @@
-package net.erickcaron.mybudgetapi.expenses;
+package net.erickcaron.mybudgetapi.expenses.request;
 
 import lombok.Builder;
 import lombok.Getter;

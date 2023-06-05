@@ -1,9 +1,10 @@
 package net.erickcaron.mybudgetapi.expenses;
 
-import net.erickcaron.mybudgetapi.mapper.CreateExpenseResponseMapper;
-import net.erickcaron.mybudgetapi.mapper.ExpenseEntityMapper;
-import net.erickcaron.mybudgetapi.mapper.FindAllExpensesResponseMapper;
-import net.erickcaron.mybudgetapi.repositories.ExpenseRepository;
+import net.erickcaron.mybudgetapi.expenses.mapper.CreateExpenseResponseMapper;
+import net.erickcaron.mybudgetapi.expenses.mapper.ExpenseEntityMapper;
+import net.erickcaron.mybudgetapi.expenses.mapper.FindAllExpensesResponseMapper;
+import net.erickcaron.mybudgetapi.expenses.mapper.FindExpenseResponseMapper;
+import net.erickcaron.mybudgetapi.repository.ExpenseRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,17 +15,16 @@ public class ExpenseConfiguration {
     ExpenseAPI expenseAPI(ExpenseRepository expenseRepository,
                           ExpenseEntityMapper expenseEntityMapper,
                           CreateExpenseResponseMapper createExpenseResponseMapper,
-                          FindAllExpensesResponseMapper findAllExpensesResponseMapper){
+                          FindAllExpensesResponseMapper findAllExpensesResponseMapper,
+                          FindExpenseResponseMapper findExpenseResponseMapper,
+                          UpdateExpenseLogic updateExpenseLogic){
         return new ExpenseFacade(
                 expenseRepository,
                 expenseEntityMapper,
                 createExpenseResponseMapper,
-                findAllExpensesResponseMapper);
+                findAllExpensesResponseMapper,
+                findExpenseResponseMapper,
+                updateExpenseLogic);
     }
-
-    /*
-
-    missing : private final ExpenseRepository  BUT IS ABSTRACT???
-     */
 
 }
