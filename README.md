@@ -1,18 +1,19 @@
 # myBudgetAPI
 RestAPI version of application myBudget  
-Project currently in development for a personal usage
+Project currently in development for a personal usage.
 
-# Technologies
+## Technologies
 
-Java/Spring boot/Hibernate, database mySQL, RestAPI.  
-Lombok.  
+-Java, Spring boot, JPA, Hibernate, H2, Lombok, Log4j2/Logback/slf4j
 
-To be implemented: at least: Microservices (Eureka), RabbitMQ, JavaMail.
+-Facade pattern
 
-Frontend in independant application: JavaScript/CSS/HTML
+## To be implemented (at least):
 
-# Endpoints
-/currencies  
-/shops  
-/users  
-/expenses  
+-Code refactoring/improvements
+
+-Unit tests - jUnit, Mockito
+
+-Expense's deletion mechanism
+
+-MySQL database
