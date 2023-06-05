@@ -64,7 +64,7 @@ public class UpdateExpenseLogic {
     }
 
     private BigDecimal settleAmount(BigDecimal fromDB, BigDecimal fromIncoming){
-        return fromDB.equals(fromIncoming)
+        return fromDB.compareTo(fromIncoming) == 0
                 ? fromDB
                 : fromIncoming;
     }
