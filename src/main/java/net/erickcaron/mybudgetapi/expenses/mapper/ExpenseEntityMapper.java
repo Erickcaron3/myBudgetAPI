@@ -5,20 +5,18 @@ import net.erickcaron.mybudgetapi.expenses.request.CreateExpenseRequest;
 import net.erickcaron.mybudgetapi.utils.Mapper;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
 public class ExpenseEntityMapper implements Mapper<CreateExpenseRequest, ExpenseEntity> {
 
     @Override
     public ExpenseEntity convert(CreateExpenseRequest source) {
-        ExpenseEntity expenseEntity = new ExpenseEntity();
-        expenseEntity.setAmount(source.getAmount());
-        expenseEntity.setCurrency(source.getCurrency());
-        expenseEntity.setShop(source.getShop());
-        expenseEntity.setComment(Optional.of(source).map(CreateExpenseRequest::getComment).orElse(""));
-        expenseEntity.setPayer(source.getPayer());
-        return expenseEntity;
+        return ExpenseEntity.builder()
+                .amount(source.getAmount())
+                .currency(source.getCurrency())
+                .shop(source.getShop())
+                .comment(source.getComment())
+                .payer(source.getPayer())
+                .build();
     }
 
 

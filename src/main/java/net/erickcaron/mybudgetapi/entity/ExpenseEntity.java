@@ -1,7 +1,9 @@
 package net.erickcaron.mybudgetapi.entity;
 
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,8 +12,10 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@RequiredArgsConstructor
 @Getter
 @Setter
+@Builder
 
 @Entity
 @Table(name = "expenses")

@@ -20,7 +20,7 @@ public class UpdateExpenseLogic {
         this.expenseRepository = expenseRepository;
     }
 
-    public UpdateExpenseResponse updateById(String id, UpdateExpenseRequest updateExpenseRequest){
+    public UpdateExpenseResponse updateById(String id, UpdateExpenseRequest updateExpenseRequest) {
         ExpenseEntity expenseFromDataBase = expenseRepository.findById(Long.valueOf(id))
                 .orElseThrow(() -> {
                     log.error("There is no expense with the id: " + id);
@@ -28,11 +28,11 @@ public class UpdateExpenseLogic {
                 });
 
         return !isEntityCommonWithIncomingValues(expenseFromDataBase, updateExpenseRequest)
-                ?  handleUpdateWithSuccess(expenseFromDataBase, updateExpenseRequest)
+                ? handleUpdateWithSuccess(expenseFromDataBase, updateExpenseRequest)
                 : handleUpdateWithoutSuccess(id);
     }
 
-    private UpdateExpenseResponse handleUpdateWithSuccess(ExpenseEntity expenseFromDataBase, UpdateExpenseRequest updateExpenseRequest){
+    private UpdateExpenseResponse handleUpdateWithSuccess(ExpenseEntity expenseFromDataBase, UpdateExpenseRequest updateExpenseRequest) {
         ExpenseEntity expenseToSave = buildExpenseEntityToSave(expenseFromDataBase, updateExpenseRequest);
         String id = expenseFromDataBase.getId().toString();
         expenseRepository.save(expenseToSave);
@@ -40,12 +40,12 @@ public class UpdateExpenseLogic {
         return buildUpdateExpenseResponse(id, true);
     }
 
-    private UpdateExpenseResponse handleUpdateWithoutSuccess(String id){
+    private UpdateExpenseResponse handleUpdateWithoutSuccess(String id) {
         log.info("Expense with id " + id + "not updated");
         return buildUpdateExpenseResponse(id, false);
     }
 
-    private UpdateExpenseResponse buildUpdateExpenseResponse(String id, boolean isUpdated){
+    private UpdateExpenseResponse buildUpdateExpenseResponse(String id, boolean isUpdated) {
         return UpdateExpenseResponse.builder()
                 .id(id)
                 .isUpdated(isUpdated)
@@ -53,29 +53,29 @@ public class UpdateExpenseLogic {
     }
 
 
-    private ExpenseEntity buildExpenseEntityToSave(ExpenseEntity expenseFromDatabase, UpdateExpenseRequest incomingValues){
-        expenseFromDatabase.setAmount(settleAmount(expenseFromDatabase.getAmount(), incomingValues.getAmount()));
-        expenseFromDatabase.setCurrency(settleStringElement(expenseFromDatabase.getCurrency(), incomingValues.getCurrency()));
-        expenseFromDatabase.setShop(settleStringElement(expenseFromDatabase.getShop(), incomingValues.getShop()));
-        expenseFromDatabase.setPayer(settleStringElement(expenseFromDatabase.getPayer(), incomingValues.getPayer()));
-        expenseFromDatabase.setComment(settleStringElement(expenseFromDatabase.getComment(), incomingValues.getComment()));
-        return expenseFromDatabase;
-
+    private ExpenseEntity buildExpenseEntityToSave(ExpenseEntity expenseFromDatabase, UpdateExpenseRequest incomingValues) {
+        return ExpenseEntity.builder()
+                .id(expenseFromDatabase.getId())
+                .amount(settleAmount(expenseFromDatabase.getAmount(), incomingValues.getAmount()))
+                .comment(settleStringElement(expenseFromDatabase.getCurrency(), incomingValues.getCurrency()))
+                .shop(settleStringElement(expenseFromDatabase.getShop(), incomingValues.getShop()))
+                .comment(settleStringElement(expenseFromDatabase.getComment(), incomingValues.getComment()))
+                .build();
     }
 
-    private BigDecimal settleAmount(BigDecimal fromDB, BigDecimal fromIncoming){
+    private BigDecimal settleAmount(BigDecimal fromDB, BigDecimal fromIncoming) {
         return fromDB.compareTo(fromIncoming) == 0
                 ? fromDB
                 : fromIncoming;
     }
 
-    private String settleStringElement(String fromDB, String fromIncoming){
+    private String settleStringElement(String fromDB, String fromIncoming) {
         return fromDB.equalsIgnoreCase(fromIncoming)
                 ? fromDB
                 : fromIncoming;
     }
 
-    private boolean isEntityCommonWithIncomingValues(ExpenseEntity expenseFromDatabase, UpdateExpenseRequest incomingValues){
+    private boolean isEntityCommonWithIncomingValues(ExpenseEntity expenseFromDatabase, UpdateExpenseRequest incomingValues) {
         return expenseFromDatabase.getAmount().equals(incomingValues.getAmount())
                 && expenseFromDatabase.getCurrency().equalsIgnoreCase(incomingValues.getCurrency())
                 && expenseFromDatabase.getShop().equalsIgnoreCase(incomingValues.getShop())
@@ -83,12 +83,12 @@ public class UpdateExpenseLogic {
                 && areCommentsSimilar(expenseFromDatabase.getComment(), incomingValues.getComment());
     }
 
-    private boolean areCommentsSimilar(String commentFromDatabase, String incomingComment){
+    private boolean areCommentsSimilar(String commentFromDatabase, String incomingComment) {
         return isIncomingCommentEligibleForUpdate(incomingComment) && commentFromDatabase.equalsIgnoreCase(incomingComment);
 
     }
 
-    private boolean isIncomingCommentEligibleForUpdate(String incomingComment){
+    private boolean isIncomingCommentEligibleForUpdate(String incomingComment) {
         return incomingComment != null && !incomingComment.equalsIgnoreCase("");
 
     }
