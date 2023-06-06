@@ -5,6 +5,8 @@ import net.erickcaron.mybudgetapi.expenses.request.CreateExpenseRequest;
 import net.erickcaron.mybudgetapi.utils.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class ExpenseEntityMapper implements Mapper<CreateExpenseRequest, ExpenseEntity> {
 
@@ -14,7 +16,7 @@ public class ExpenseEntityMapper implements Mapper<CreateExpenseRequest, Expense
                 .amount(source.getAmount())
                 .currency(source.getCurrency())
                 .shop(source.getShop())
-                .comment(source.getComment())
+                .comment(Optional.of(source).map(CreateExpenseRequest::getComment).orElse(""))
                 .payer(source.getPayer())
                 .build();
     }

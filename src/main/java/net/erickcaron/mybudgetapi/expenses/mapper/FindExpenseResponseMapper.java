@@ -1,7 +1,6 @@
 package net.erickcaron.mybudgetapi.expenses.mapper;
 
 import net.erickcaron.mybudgetapi.entity.ExpenseEntity;
-import net.erickcaron.mybudgetapi.expenses.request.CreateExpenseRequest;
 import net.erickcaron.mybudgetapi.expenses.response.FindExpenseResponse;
 import net.erickcaron.mybudgetapi.utils.Mapper;
 import org.springframework.stereotype.Component;
