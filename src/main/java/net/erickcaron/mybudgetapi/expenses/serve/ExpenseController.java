@@ -40,13 +40,11 @@ public class ExpenseController {
 
     @GetMapping("/{id}")
     public ResponseEntity<FindExpenseResponse> findById(@PathVariable String id) {
-        Optional<FindExpenseResponse> response = expenseAPI.findExpenseById(id);
-
-        if (response.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no any expense with requested id: " + id);
-        }
-
-        return ResponseEntity.ok(response.get());
+        return ResponseEntity.ok(expenseAPI.findExpenseById(id)
+                .orElseThrow(
+                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no any expense with requested id: " + id)
+                )
+        );
     }
 
     @PatchMapping()
