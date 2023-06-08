@@ -9,10 +9,13 @@ import net.erickcaron.mybudgetapi.expenses.response.CreateExpenseResponse;
 import net.erickcaron.mybudgetapi.expenses.response.FindAllExpensesResponse;
 import net.erickcaron.mybudgetapi.expenses.response.FindExpenseResponse;
 import net.erickcaron.mybudgetapi.expenses.response.UpdateExpenseResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 
@@ -23,27 +26,32 @@ public class ExpenseController {
 
     private final ExpenseAPI expenseAPI;
 
-    @PostMapping("/save")
-    public ResponseEntity<CreateExpenseResponse> create(@RequestBody @Valid CreateExpenseRequest createExpenseRequest){
+    @PostMapping()
+    public ResponseEntity<CreateExpenseResponse> create(@RequestBody @Valid CreateExpenseRequest createExpenseRequest) {
         CreateExpenseResponse response = expenseAPI.createExpense(createExpenseRequest);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping()
-    public ResponseEntity<FindAllExpensesResponse> findAll(){
+    public ResponseEntity<FindAllExpensesResponse> findAll() {
         FindAllExpensesResponse response = expenseAPI.findAllExpenses();
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FindExpenseResponse> findById(@PathVariable String id){
-        FindExpenseResponse response = expenseAPI.findExpenseById(id);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<FindExpenseResponse> findById(@PathVariable String id) {
+        Optional<FindExpenseResponse> response = expenseAPI.findExpenseById(id);
+
+        if (response.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no any expense with requested id: " + id);
+        }
+
+        return ResponseEntity.ok(response.get());
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<UpdateExpenseResponse> updateById(@PathVariable String id, @RequestBody @Valid UpdateExpenseRequest updateExpenseRequest){
-        UpdateExpenseResponse response = expenseAPI.updateById(id, updateExpenseRequest);
+    @PatchMapping()
+    public ResponseEntity<UpdateExpenseResponse> updateById(@RequestBody @Valid UpdateExpenseRequest updateExpenseRequest) {
+        UpdateExpenseResponse response = expenseAPI.updateById(updateExpenseRequest);
         return ResponseEntity.ok(response);
     }
 
