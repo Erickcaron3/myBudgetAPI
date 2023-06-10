@@ -1,5 +1,6 @@
 package net.erickcaron.mybudgetapi.expenses.serve;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.erickcaron.mybudgetapi.expenses.*;
@@ -8,34 +9,31 @@ import net.erickcaron.mybudgetapi.expenses.request.UpdateExpenseRequest;
 import net.erickcaron.mybudgetapi.expenses.response.CreateExpenseResponse;
 import net.erickcaron.mybudgetapi.expenses.response.FindAllExpensesResponse;
 import net.erickcaron.mybudgetapi.expenses.response.FindExpenseResponse;
-import net.erickcaron.mybudgetapi.expenses.response.UpdateExpenseResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 
 @Slf4j
 @RestController
 @RequestMapping("/api/expenses")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ExpenseController {
 
     private final ExpenseAPI expenseAPI;
 
-    @PostMapping()
+    @PostMapping(consumes = "application/json")
     public ResponseEntity<CreateExpenseResponse> create(@RequestBody @Valid CreateExpenseRequest createExpenseRequest) {
-        CreateExpenseResponse response = expenseAPI.createExpense(createExpenseRequest);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(expenseAPI.createExpense(createExpenseRequest));
     }
 
     @GetMapping()
     public ResponseEntity<FindAllExpensesResponse> findAll() {
-        FindAllExpensesResponse response = expenseAPI.findAllExpenses();
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(expenseAPI.findAllExpenses());
     }
 
     @GetMapping("/{id}")
@@ -47,10 +45,10 @@ public class ExpenseController {
         );
     }
 
+    @Hidden
     @PatchMapping()
-    public ResponseEntity<UpdateExpenseResponse> updateById(@RequestBody @Valid UpdateExpenseRequest updateExpenseRequest) {
-        UpdateExpenseResponse response = expenseAPI.updateById(updateExpenseRequest);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<String> updateById(@RequestBody @Valid UpdateExpenseRequest updateExpenseRequest) {
+        return ResponseEntity.badRequest().body("Not implemented yet");
     }
 
 
