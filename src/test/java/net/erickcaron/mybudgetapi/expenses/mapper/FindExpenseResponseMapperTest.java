@@ -1,12 +1,12 @@
 package net.erickcaron.mybudgetapi.expenses.mapper;
 
-import net.erickcaron.mybudgetapi.entity.ExpenseEntity;
-import net.erickcaron.mybudgetapi.expenses.request.CreateExpenseRequest;
+import net.erickcaron.mybudgetapi.expenses.entity.ExpenseEntity;
 import net.erickcaron.mybudgetapi.expenses.response.FindExpenseResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,15 +28,17 @@ class FindExpenseResponseMapperTest {
                 .payer("Erick")
                 .shop("Carrefour")
                 .comment("Shopping in carrefour")
+                .creationDate(LocalDateTime.now())
                 .build();
 
-        FindExpenseResponse findExpenseResponse = findExpenseResponseMapper.convert(expense);
+        FindExpenseResponse response = findExpenseResponseMapper.convert(expense);
 
-        assertEquals(expense.getId(), findExpenseResponse.getId());
-        assertEquals(expense.getAmount(), findExpenseResponse.getAmount());
-        assertEquals(expense.getCurrency(), findExpenseResponse.getCurrency());
-        assertEquals(expense.getShop(), findExpenseResponse.getShop());
-        assertEquals(expense.getComment(), findExpenseResponse.getComment());
-        assertEquals(expense.getPayer(), findExpenseResponse.getPayer());
+        assertEquals(expense.getId(), response.getId());
+        assertEquals(expense.getAmount(), response.getAmount());
+        assertEquals(expense.getCurrency(), response.getCurrency());
+        assertEquals(expense.getShop(), response.getShop());
+        assertEquals(expense.getComment(), response.getComment());
+        assertEquals(expense.getPayer(), response.getPayer());
+        assertEquals(expense.getCreationDate(), response.getCreationDate());
     }
 }

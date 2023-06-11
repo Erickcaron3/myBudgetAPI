@@ -3,7 +3,7 @@ package net.erickcaron.mybudgetapi.expenses.response;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import net.erickcaron.mybudgetapi.entity.ExpenseEntity;
+import net.erickcaron.mybudgetapi.expenses.entity.ExpenseEntity;
 
 import java.util.List;
 

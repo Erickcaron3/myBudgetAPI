@@ -1,6 +1,6 @@
 package net.erickcaron.mybudgetapi.expenses.mapper;
 
-import net.erickcaron.mybudgetapi.entity.ExpenseEntity;
+import net.erickcaron.mybudgetapi.expenses.entity.ExpenseEntity;
 import net.erickcaron.mybudgetapi.expenses.response.FindExpenseResponse;
 import net.erickcaron.mybudgetapi.utils.Mapper;
 import org.springframework.stereotype.Component;
@@ -19,6 +19,7 @@ public class FindExpenseResponseMapper implements Mapper<ExpenseEntity, FindExpe
                 .shop(source.getShop())
                 .comment(Optional.of(source).map(ExpenseEntity::getComment).orElse(""))
                 .payer(source.getPayer())
+                .creationDate(source.getCreationDate())
                 .build();
     }
 }

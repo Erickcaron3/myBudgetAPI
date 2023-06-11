@@ -29,4 +29,13 @@ public class CreateExpenseRequest {
     @NotNull
     @NotBlank
     private String payer;
+
+
+    public CreateExpenseRequest(BigDecimal amount, String currency, String shop, String comment, String payer) {
+        this.amount = amount;
+        this.currency = currency;
+        this.shop = shop;
+        this.comment = comment;
+        this.payer = payer;
+    }
 }

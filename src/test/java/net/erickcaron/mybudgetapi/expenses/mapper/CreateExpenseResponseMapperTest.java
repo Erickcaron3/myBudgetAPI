@@ -1,8 +1,7 @@
 package net.erickcaron.mybudgetapi.expenses.mapper;
 
-import net.erickcaron.mybudgetapi.entity.ExpenseEntity;
+import net.erickcaron.mybudgetapi.expenses.entity.ExpenseEntity;
 import net.erickcaron.mybudgetapi.expenses.response.CreateExpenseResponse;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

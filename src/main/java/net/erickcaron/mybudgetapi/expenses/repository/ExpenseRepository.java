@@ -1,6 +1,6 @@
-package net.erickcaron.mybudgetapi.repository;
+package net.erickcaron.mybudgetapi.expenses.repository;
 
-import net.erickcaron.mybudgetapi.entity.ExpenseEntity;
+import net.erickcaron.mybudgetapi.expenses.entity.ExpenseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -45,11 +45,19 @@ public class ExpenseController {
         );
     }
 
-    @Hidden
     @PatchMapping()
-    public ResponseEntity<String> updateById(@RequestBody @Valid UpdateExpenseRequest updateExpenseRequest) {
-        return ResponseEntity.badRequest().body("Not implemented yet");
+    public void updateById(@RequestBody @Valid UpdateExpenseRequest updateExpenseRequest) {
+        expenseAPI.updateById(updateExpenseRequest);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteExpenseById(@PathVariable String id){
+        expenseAPI.deleteById(id);
+    }
+
+    @GetMapping("/generate/{numberOfExpenses}")
+    public void generateData(@PathVariable Long numberOfExpenses){
+        expenseAPI.saveEntities(25L);
+    }
 
 }

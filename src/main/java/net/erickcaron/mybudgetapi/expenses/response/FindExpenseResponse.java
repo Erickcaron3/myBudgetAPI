@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -15,4 +16,5 @@ public class FindExpenseResponse {
     private String shop;
     private String comment;
     private String payer;
+    private LocalDateTime creationDate;
 }

@@ -1,4 +1,4 @@
-package net.erickcaron.mybudgetapi.entity;
+package net.erickcaron.mybudgetapi.expenses.entity;
 
 
 import lombok.*;
@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -43,6 +44,10 @@ public class ExpenseEntity {
     @NotBlank
     @Column(name = "payer")
     private String payer;
+
+    @NotNull
+    @Column(name="creation_date")
+    private LocalDateTime creationDate;
 
 }
 

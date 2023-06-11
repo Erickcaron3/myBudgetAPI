@@ -4,7 +4,8 @@ import net.erickcaron.mybudgetapi.expenses.mapper.CreateExpenseResponseMapper;
 import net.erickcaron.mybudgetapi.expenses.mapper.ExpenseEntityMapper;
 import net.erickcaron.mybudgetapi.expenses.mapper.FindAllExpensesResponseMapper;
 import net.erickcaron.mybudgetapi.expenses.mapper.FindExpenseResponseMapper;
-import net.erickcaron.mybudgetapi.repository.ExpenseRepository;
+import net.erickcaron.mybudgetapi.expenses.repository.ExpenseRepository;
+import net.erickcaron.mybudgetapi.utils.ExpenseEntityGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,14 +18,15 @@ public class ExpenseConfiguration {
                           CreateExpenseResponseMapper createExpenseResponseMapper,
                           FindAllExpensesResponseMapper findAllExpensesResponseMapper,
                           FindExpenseResponseMapper findExpenseResponseMapper,
-                          UpdateExpenseLogic updateExpenseLogic){
+                          ExpenseEntityGenerator expenseEntityGenerator
+                          ){
         return new ExpenseFacade(
                 expenseRepository,
                 expenseEntityMapper,
                 createExpenseResponseMapper,
                 findAllExpensesResponseMapper,
                 findExpenseResponseMapper,
-                updateExpenseLogic);
+                expenseEntityGenerator);
     }
 
 }
