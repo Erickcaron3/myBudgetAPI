@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +18,7 @@ class FindAllExpensesResponseMapperTest {
     FindAllExpensesResponseMapper findAllExpensesResponseMapper;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         findAllExpensesResponseMapper = new FindAllExpensesResponseMapper();
     }
 
@@ -28,43 +29,53 @@ class FindAllExpensesResponseMapperTest {
                         .id(1L)
                         .amount(BigDecimal.valueOf(150.00))
                         .currency("PLN")
-                        .payer("Erick")
                         .shop("Carrefour")
                         .comment("Shopping in carrefour")
+                        .coverageFrom(LocalDate.of(2023, 01, 31))
+                        .coverageTo(LocalDate.of(2023, 01, 31))
+                        .dueDate(LocalDate.of(2023, 01, 15))
+                        .documentCreationDate(LocalDate.of(2023, 01, 01))
                         .build());
 
         FindAllExpensesResponse response = findAllExpensesResponseMapper.convert(expenses);
 
         assertEquals(response.getExpensesList(), expenses);
         assertEquals(response.getExpensesList().size(), expenses.size());
-        assertFalse(response.isExpensesListEmpty());
     }
 
     @Test
     void shouldMapCorrectlyWithMoreThanOneExpenseEntity() {
         List<ExpenseEntity> expenses = Arrays.asList(
+
                 ExpenseEntity.builder()
                         .id(1L)
                         .amount(BigDecimal.valueOf(150.00))
                         .currency("PLN")
-                        .payer("Erick")
                         .shop("Carrefour")
                         .comment("Shopping in carrefour")
+                        .coverageFrom(LocalDate.of(2023, 01, 31))
+                        .coverageTo(LocalDate.of(2023, 01, 31))
+                        .dueDate(LocalDate.of(2023, 01, 15))
+                        .documentCreationDate(LocalDate.of(2023, 01, 01))
                         .build(),
+
                 ExpenseEntity.builder()
-                        .id(1L)
+                        .id(2L)
                         .amount(BigDecimal.valueOf(150.00))
                         .currency("PLN")
-                        .payer("Erick")
                         .shop("Carrefour")
                         .comment("Shopping in carrefour")
-                        .build());
+                        .coverageFrom(LocalDate.of(2023, 01, 31))
+                        .coverageTo(LocalDate.of(2023, 01, 31))
+                        .dueDate(LocalDate.of(2023, 01, 15))
+                        .documentCreationDate(LocalDate.of(2023, 01, 01))
+                        .build()
+                                                    );
 
         FindAllExpensesResponse response = findAllExpensesResponseMapper.convert(expenses);
 
         assertEquals(response.getExpensesList(), expenses);
         assertEquals(response.getExpensesList().size(), expenses.size());
-        assertFalse(response.isExpensesListEmpty());
     }
 
     @Test
@@ -75,6 +86,5 @@ class FindAllExpensesResponseMapperTest {
 
         assertEquals(response.getExpensesList(), expenses);
         assertEquals(response.getExpensesList().size(), expenses.size());
-        assertTrue(response.isExpensesListEmpty());
     }
 }

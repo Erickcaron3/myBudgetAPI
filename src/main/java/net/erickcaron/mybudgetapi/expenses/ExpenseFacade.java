@@ -16,6 +16,7 @@ import net.erickcaron.mybudgetapi.expenses.repository.ExpenseRepository;
 import net.erickcaron.mybudgetapi.utils.ExpenseEntityGenerator;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +42,7 @@ public class ExpenseFacade implements ExpenseAPI {
 
     private ExpenseEntity buildExpenseEntity(CreateExpenseRequest createExpenseRequest){
         ExpenseEntity expenseEntity = expenseEntityMapper.convert(createExpenseRequest);
-        expenseEntity.setCreationDate(LocalDateTime.now());
+        expenseEntity.setCreationDate(LocalDate.now());
         return expenseEntity;
 
     }
@@ -66,8 +67,6 @@ public class ExpenseFacade implements ExpenseAPI {
         if(!expenseRepository.existsById(id)) {
             log.error("There is not expense with requested id: " + id + " , update was not processed");
         }
-
-        expenseRepository.save(updateExpenseRequest.getExpense());
         log.info("Update of expense with id: " + id + " successfully processed");
 
     }
@@ -83,6 +82,7 @@ public class ExpenseFacade implements ExpenseAPI {
         if(!expenseRepository.existsById(Long.valueOf(id))) {
             log.error("There is not expense with requested id: " + id + " , deletion was not processed");
         }
+
         expenseRepository.deleteById(Long.valueOf(id));
         log.info("Deletion of expense with id: " + id + " successfully processed");
 

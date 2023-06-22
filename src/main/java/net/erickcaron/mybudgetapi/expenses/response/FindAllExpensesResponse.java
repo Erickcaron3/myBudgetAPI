@@ -11,11 +11,9 @@ import java.util.List;
 @Setter
 @Builder
 public class FindAllExpensesResponse {
-    public FindAllExpensesResponse(boolean isExpensesListEmpty, List<ExpenseEntity> expensesList) {
-        this.isExpensesListEmpty = isExpensesListEmpty;
+    public FindAllExpensesResponse(List<ExpenseEntity> expensesList) {
         this.expensesList = expensesList;
     }
 
-    private boolean isExpensesListEmpty;
     private List<ExpenseEntity> expensesList;
 }

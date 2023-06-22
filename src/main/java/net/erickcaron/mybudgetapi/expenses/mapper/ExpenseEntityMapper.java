@@ -17,7 +17,12 @@ public class ExpenseEntityMapper implements Mapper<CreateExpenseRequest, Expense
                 .currency(source.getCurrency())
                 .shop(source.getShop())
                 .comment(Optional.of(source).map(CreateExpenseRequest::getComment).orElse(""))
-                .payer(source.getPayer())
+                .coverageFrom(source.getCoverageFrom())
+                .coverageTo(source.getCoverageTo())
+                .isPaid(source.getIsPaid())
+                .dueDate(source.getDueDate())
+                .documentCreationDate(source.getDocumentCreationDate())
+                .creationDate(source.getExpenseCreationDate())
                 .build();
     }
 

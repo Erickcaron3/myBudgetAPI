@@ -14,7 +14,6 @@ public class FindAllExpensesResponseMapper implements Mapper<List<ExpenseEntity>
     public FindAllExpensesResponse convert(List<ExpenseEntity> source) {
         return FindAllExpensesResponse.builder()
                 .expensesList(mapExpensesList(source))
-                .isExpensesListEmpty(mapIsExpensesListEmpty(source))
                 .build();
     }
 

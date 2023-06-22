@@ -4,6 +4,7 @@ import net.erickcaron.mybudgetapi.expenses.entity.ExpenseEntity;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +31,7 @@ public class ExpenseEntityGenerator {
                 .amount(generateAmount())
                 .currency(generateCurrency())
                 .shop(generateShop())
-                .payer(generatePayer())
-                .creationDate(LocalDateTime.now())
+                .creationDate(LocalDate.now())
                 .comment("This is a comment")
                 .build();
     }

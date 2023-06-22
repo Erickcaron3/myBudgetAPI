@@ -26,7 +26,8 @@ public class ExpenseConfiguration {
                 createExpenseResponseMapper,
                 findAllExpensesResponseMapper,
                 findExpenseResponseMapper,
-                expenseEntityGenerator);
+                expenseEntityGenerator
+        );
     }
 
 }

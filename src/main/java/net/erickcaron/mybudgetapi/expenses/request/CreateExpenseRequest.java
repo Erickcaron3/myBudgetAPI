@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -25,17 +26,20 @@ public class CreateExpenseRequest {
     private String shop;
 
     private String comment;
+    private LocalDate expenseCreationDate;
 
     @NotNull
     @NotBlank
-    private String payer;
+    private String documentNumber;
 
+    private LocalDate documentCreationDate;
 
-    public CreateExpenseRequest(BigDecimal amount, String currency, String shop, String comment, String payer) {
-        this.amount = amount;
-        this.currency = currency;
-        this.shop = shop;
-        this.comment = comment;
-        this.payer = payer;
-    }
+    private LocalDate coverageFrom;
+    private LocalDate coverageTo;
+
+    private LocalDate dueDate;
+
+    @NotNull
+    private Boolean isPaid;
+
 }
