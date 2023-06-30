@@ -8,10 +8,8 @@ import net.erickcaron.mybudgetapi.expenses.request.UpdateExpenseRequest;
 import net.erickcaron.mybudgetapi.expenses.response.CreateExpenseResponse;
 import net.erickcaron.mybudgetapi.expenses.response.FindAllExpensesResponse;
 import net.erickcaron.mybudgetapi.expenses.response.FindExpenseResponse;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
@@ -25,28 +23,24 @@ public class ExpenseController {
 
     private final ExpenseAPI expenseAPI;
 
-    @PostMapping(consumes = "application/json")
+    @PostMapping()
     public ResponseEntity<CreateExpenseResponse> create(@RequestBody @Valid CreateExpenseRequest createExpenseRequest) {
         return ResponseEntity.ok(expenseAPI.createExpense(createExpenseRequest));
     }
 
     @GetMapping()
     public ResponseEntity<FindAllExpensesResponse> findAll() {
-        return ResponseEntity.ok(expenseAPI.findAllExpenses());
+        return ResponseEntity.ok(expenseAPI.findExpenses());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<FindExpenseResponse> findById(@PathVariable String id) {
-        return ResponseEntity.ok(expenseAPI.findExpenseById(id)
-                .orElseThrow(
-                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no any expense with requested id: " + id)
-                )
-        );
+        return ResponseEntity.ok(expenseAPI.findExpenseById(id));
     }
 
-    @PatchMapping()
-    public void updateById(@RequestBody @Valid UpdateExpenseRequest updateExpenseRequest) {
-        expenseAPI.updateById(updateExpenseRequest);
+    @PatchMapping("/{id}")
+    public void updateById(@PathVariable String id, @RequestBody @Valid UpdateExpenseRequest updateExpenseRequest) {
+        expenseAPI.updateById(id, updateExpenseRequest);
     }
 
     @DeleteMapping("/{id}")
@@ -56,7 +50,7 @@ public class ExpenseController {
 
     @GetMapping("/generate/{numberOfExpenses}")
     public void generateData(@PathVariable Long numberOfExpenses){
-        expenseAPI.saveEntities(25L);
+        expenseAPI.saveEntities(numberOfExpenses);
     }
 
 }

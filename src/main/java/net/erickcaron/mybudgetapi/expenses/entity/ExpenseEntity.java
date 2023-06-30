@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,32 +37,26 @@ public class ExpenseEntity {
     @Column(name = "shop")
     private String shop;
 
+    @NotNull
+    @NotBlank
+    private String documentNumber;
+
     @Column(name = "comment")
     private String comment;
 
     @NotNull
-    @Column(name="creation_date")
-    private LocalDate creationDate;
+    @Column(name = "coverage_from")
+    @Temporal(TemporalType.DATE)
+    private Date coverageFrom;
 
     @NotNull
-    @Column(name="document_creation_date")
-    private LocalDate documentCreationDate;
+    @Column(name = "coverage_to")
+    @Temporal(TemporalType.DATE)
+    private Date coverageTo;
 
-    @Column(name="due_date")
-    private LocalDate dueDate;
-
-    @Column(name="coverage_from")
-    private LocalDate coverageFrom;
-
-    @Column(name="coverage_to")
-    private LocalDate coverageTo;
-
-    @Column(name="paid")
-    private Boolean isPaid;
-
-
-
-
+    @NotNull
+    @Column(name = "deletion_flag")
+    private boolean isDeleted;
 
 }
 

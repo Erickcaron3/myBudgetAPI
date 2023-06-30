@@ -6,8 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.GregorianCalendar;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,11 +27,9 @@ class FindExpenseResponseMapperTest {
                 .currency("PLN")
                 .shop("Carrefour")
                 .comment("Shopping in carrefour")
-                .creationDate(LocalDate.now())
-                .coverageFrom(LocalDate.of(2023,01,31))
-                .coverageTo(LocalDate.of(2023,01,31))
-                .dueDate(LocalDate.of(2023,01,15))
-                .documentCreationDate(LocalDate.of(2023,01,01))
+                .documentNumber("123456")
+                .coverageFrom(new GregorianCalendar(2023,01,01).getTime())
+                .coverageFrom(new GregorianCalendar(2023,01,31).getTime())
                 .build();
 
         FindExpenseResponse response = findExpenseResponseMapper.convert(expense);
@@ -42,15 +39,8 @@ class FindExpenseResponseMapperTest {
         assertEquals(expense.getCurrency(), response.getCurrency());
         assertEquals(expense.getShop(), response.getShop());
         assertEquals(expense.getComment(), response.getComment());
-        assertEquals(expense.getCreationDate(), response.getCreationDate());
+        assertEquals(expense.getDocumentNumber(), response.getDocumentNumber());
         assertEquals(expense.getCoverageFrom(), response.getCoverageFrom());
         assertEquals(expense.getCoverageTo(), response.getCoverageTo());
-        assertEquals(expense.getDocumentCreationDate(), response.getDocumentCreationDate());
-        assertEquals(expense.getDueDate(), response.getCreationDate());
-
-
-
-
-
     }
 }

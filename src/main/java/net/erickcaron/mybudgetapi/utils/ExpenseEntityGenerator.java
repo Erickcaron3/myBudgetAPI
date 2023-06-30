@@ -4,11 +4,7 @@ import net.erickcaron.mybudgetapi.expenses.entity.ExpenseEntity;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Component
 public class ExpenseEntityGenerator {
@@ -31,8 +27,10 @@ public class ExpenseEntityGenerator {
                 .amount(generateAmount())
                 .currency(generateCurrency())
                 .shop(generateShop())
-                .creationDate(LocalDate.now())
                 .comment("This is a comment")
+                .documentNumber("1223456")
+                .coverageFrom(new GregorianCalendar(2023,01,01).getTime())
+                .coverageTo(new GregorianCalendar(2023,01,31).getTime())
                 .build();
     }
 
@@ -43,20 +41,16 @@ public class ExpenseEntityGenerator {
 
     private String generateCurrency() {
         String[] currencies = {"zł", "EUR"};
-        return getRandomFromArray(currencies);
+        return getRandomStringFromArray(currencies);
     }
 
-    private String generatePayer() {
-        String[] payers = {"Erick", "Magda"};
-        return getRandomFromArray(payers);
-    }
 
     private String generateShop() {
         String[] shops = {"Auchan", "Carrefour", "Biedronka", "Decathlon", "Lidl"};
-        return getRandomFromArray(shops);
+        return getRandomStringFromArray(shops);
     }
 
-    private String getRandomFromArray(String[] data) {
+    private String getRandomStringFromArray(String[] data) {
         return data[RANDOM.nextInt(data.length)];
     }
 

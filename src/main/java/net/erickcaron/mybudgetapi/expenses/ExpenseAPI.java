@@ -6,13 +6,11 @@ import net.erickcaron.mybudgetapi.expenses.response.CreateExpenseResponse;
 import net.erickcaron.mybudgetapi.expenses.response.FindAllExpensesResponse;
 import net.erickcaron.mybudgetapi.expenses.response.FindExpenseResponse;
 
-import java.util.Optional;
-
 public interface ExpenseAPI {
     CreateExpenseResponse createExpense(CreateExpenseRequest createExpenseRequest);
-    FindAllExpensesResponse findAllExpenses();
-    Optional<FindExpenseResponse> findExpenseById(String id);
-    void updateById(UpdateExpenseRequest updateExpenseRequest);
+    FindAllExpensesResponse findExpenses();
+    FindExpenseResponse findExpenseById(String id);
+    void updateById(String id, UpdateExpenseRequest updateExpenseRequest);
     void saveEntities(Long numberOfExpenses);
     void deleteById(String id);
 }

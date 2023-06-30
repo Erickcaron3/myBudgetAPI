@@ -6,9 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,10 +31,9 @@ class FindAllExpensesResponseMapperTest {
                         .currency("PLN")
                         .shop("Carrefour")
                         .comment("Shopping in carrefour")
-                        .coverageFrom(LocalDate.of(2023, 01, 31))
-                        .coverageTo(LocalDate.of(2023, 01, 31))
-                        .dueDate(LocalDate.of(2023, 01, 15))
-                        .documentCreationDate(LocalDate.of(2023, 01, 01))
+                        .documentNumber("123456")
+                        .coverageFrom(new GregorianCalendar(2023,01,01).getTime())
+                        .coverageFrom(new GregorianCalendar(2023,01,31).getTime())
                         .build());
 
         FindAllExpensesResponse response = findAllExpensesResponseMapper.convert(expenses);
@@ -53,10 +52,9 @@ class FindAllExpensesResponseMapperTest {
                         .currency("PLN")
                         .shop("Carrefour")
                         .comment("Shopping in carrefour")
-                        .coverageFrom(LocalDate.of(2023, 01, 31))
-                        .coverageTo(LocalDate.of(2023, 01, 31))
-                        .dueDate(LocalDate.of(2023, 01, 15))
-                        .documentCreationDate(LocalDate.of(2023, 01, 01))
+                        .documentNumber("123456")
+                        .coverageFrom(new GregorianCalendar(2023,01,01).getTime())
+                        .coverageFrom(new GregorianCalendar(2023,01,31).getTime())
                         .build(),
 
                 ExpenseEntity.builder()
@@ -65,10 +63,9 @@ class FindAllExpensesResponseMapperTest {
                         .currency("PLN")
                         .shop("Carrefour")
                         .comment("Shopping in carrefour")
-                        .coverageFrom(LocalDate.of(2023, 01, 31))
-                        .coverageTo(LocalDate.of(2023, 01, 31))
-                        .dueDate(LocalDate.of(2023, 01, 15))
-                        .documentCreationDate(LocalDate.of(2023, 01, 01))
+                        .documentNumber("123456")
+                        .coverageFrom(new GregorianCalendar(2023,01,01).getTime())
+                        .coverageFrom(new GregorianCalendar(2023,01,31).getTime())
                         .build()
                                                     );
 

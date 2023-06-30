@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class ExpenseEntityMapper implements Mapper<CreateExpenseRequest, ExpenseEntity> {
+public class CreateExpenseRequestToExpenseEntityMapper implements Mapper<CreateExpenseRequest, ExpenseEntity> {
 
     @Override
     public ExpenseEntity convert(CreateExpenseRequest source) {
@@ -17,12 +17,10 @@ public class ExpenseEntityMapper implements Mapper<CreateExpenseRequest, Expense
                 .currency(source.getCurrency())
                 .shop(source.getShop())
                 .comment(Optional.of(source).map(CreateExpenseRequest::getComment).orElse(""))
+                .documentNumber(source.getDocumentNumber())
                 .coverageFrom(source.getCoverageFrom())
                 .coverageTo(source.getCoverageTo())
-                .isPaid(source.getIsPaid())
-                .dueDate(source.getDueDate())
-                .documentCreationDate(source.getDocumentCreationDate())
-                .creationDate(source.getExpenseCreationDate())
+                .isDeleted(false)
                 .build();
     }
 

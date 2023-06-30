@@ -18,12 +18,9 @@ public class FindExpenseResponseMapper implements Mapper<ExpenseEntity, FindExpe
                 .currency(source.getCurrency())
                 .shop(source.getShop())
                 .comment(Optional.of(source).map(ExpenseEntity::getComment).orElse(""))
-                .creationDate(source.getCreationDate())
+                .documentNumber(source.getDocumentNumber())
                 .coverageFrom(source.getCoverageFrom())
                 .coverageTo(source.getCoverageTo())
-                .isPaid(source.getIsPaid())
-                .dueDate(source.getDueDate())
-                .documentCreationDate(source.getDocumentCreationDate())
                 .build();
     }
 }

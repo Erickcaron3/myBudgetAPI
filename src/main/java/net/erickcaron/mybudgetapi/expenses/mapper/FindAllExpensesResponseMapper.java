@@ -17,10 +17,6 @@ public class FindAllExpensesResponseMapper implements Mapper<List<ExpenseEntity>
                 .build();
     }
 
-    private boolean mapIsExpensesListEmpty(List<ExpenseEntity> source){
-        return source.isEmpty();
-    }
-
     private List<ExpenseEntity> mapExpensesList(List<ExpenseEntity> source){
         return new ArrayList<>(source);
     }
