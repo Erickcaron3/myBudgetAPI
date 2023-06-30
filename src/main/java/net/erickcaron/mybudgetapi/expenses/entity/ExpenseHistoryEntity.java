@@ -15,12 +15,16 @@ import java.util.Date;
 @Builder
 
 @Entity
-@Table(name = "expenses")
-public class ExpenseEntity {
+@Table(name = "expenses_history")
+public class ExpenseHistoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Column(name = "expense_entity_id")
+    private Long expenseEntityId;
 
     @NotNull
     @Column(name = "amount")
@@ -57,7 +61,8 @@ public class ExpenseEntity {
     @Column(name = "deletion_flag")
     private boolean isDeleted;
 
+    @NotNull
+    @Column(name = "last_modification_date")
+    @Temporal(TemporalType.DATE)
+    private Date lastModificationDate;
 }
-
-
-
