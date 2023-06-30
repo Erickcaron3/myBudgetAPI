@@ -1,4 +1,4 @@
-package net.erickcaron.mybudgetapi;
+package net.erickcaron.mybudgetapi.logic;
 
 import net.erickcaron.mybudgetapi.expenses.entity.ExpenseEntity;
 import net.erickcaron.mybudgetapi.expenses.mapper.CreateExpenseRequestToExpenseEntityMapper;

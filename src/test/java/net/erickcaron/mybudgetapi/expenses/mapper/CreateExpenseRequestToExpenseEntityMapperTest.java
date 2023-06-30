@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,8 +27,8 @@ class CreateExpenseRequestToExpenseEntityMapperTest {
                 .currency("PLN")
                 .shop("Carrefour")
                 .comment("Shopping in carrefour")
-                .coverageFrom(new GregorianCalendar(2023,01,01).getTime())
-                .coverageFrom(new GregorianCalendar(2023,01,31).getTime())
+                .coverageFrom(LocalDate.now())
+                .coverageTo(LocalDate.now())
                 .documentNumber("123456")
                 .build();
 
@@ -54,8 +54,8 @@ class CreateExpenseRequestToExpenseEntityMapperTest {
                 .currency("PLN")
                 .shop("Carrefour")
                 .comment(null)
-                .coverageFrom(new GregorianCalendar(2023,01,01).getTime())
-                .coverageFrom(new GregorianCalendar(2023,01,31).getTime())
+                .coverageFrom(LocalDate.now())
+                .coverageTo(LocalDate.now())
                 .documentNumber("123456")
                 .build();
 

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -43,15 +43,11 @@ public class ExpenseEntity {
     @Column(name = "comment")
     private String comment;
 
-    @NotNull
     @Column(name = "coverage_from")
-    @Temporal(TemporalType.DATE)
-    private Date coverageFrom;
+    private LocalDate coverageFrom;
 
-    @NotNull
     @Column(name = "coverage_to")
-    @Temporal(TemporalType.DATE)
-    private Date coverageTo;
+    private LocalDate coverageTo;
 
     @NotNull
     @Column(name = "deletion_flag")

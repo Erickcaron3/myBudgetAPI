@@ -4,12 +4,14 @@ import net.erickcaron.mybudgetapi.expenses.entity.ExpenseEntity;
 import net.erickcaron.mybudgetapi.expenses.mapper.FindAllExpensesResponseMapper;
 import net.erickcaron.mybudgetapi.expenses.repository.ExpenseRepository;
 import net.erickcaron.mybudgetapi.expenses.response.FindAllExpensesResponse;
+import net.erickcaron.mybudgetapi.logic.FindAllExpensesLogic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -41,8 +43,8 @@ class FindAllExpensesLogicTest {
                 .shop("Carrefour")
                 .comment("Shopping in carrefour")
                 .documentNumber("123456")
-                .coverageFrom(new GregorianCalendar(2023, 01, 01).getTime())
-                .coverageFrom(new GregorianCalendar(2023, 01, 31).getTime())
+                .coverageFrom(LocalDate.now())
+                .coverageTo(LocalDate.now())
                 .build();
 
         ExpenseEntity expense2 = ExpenseEntity.builder()
@@ -52,8 +54,8 @@ class FindAllExpensesLogicTest {
                 .shop("Carrefour")
                 .comment("Shopping in carrefour")
                 .documentNumber("123456")
-                .coverageFrom(new GregorianCalendar(2023, 01, 01).getTime())
-                .coverageFrom(new GregorianCalendar(2023, 01, 31).getTime())
+                .coverageFrom(LocalDate.now())
+                .coverageTo(LocalDate.now())
                 .build();
 
         List<ExpenseEntity> entitiesList = List.of(expense1, expense2);

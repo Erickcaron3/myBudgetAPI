@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -49,13 +50,11 @@ public class ExpenseHistoryEntity {
 
     @NotNull
     @Column(name = "coverage_from")
-    @Temporal(TemporalType.DATE)
-    private Date coverageFrom;
+    private LocalDate coverageFrom;
 
     @NotNull
     @Column(name = "coverage_to")
-    @Temporal(TemporalType.DATE)
-    private Date coverageTo;
+    private LocalDate coverageTo;
 
     @NotNull
     @Column(name = "deletion_flag")
@@ -63,6 +62,5 @@ public class ExpenseHistoryEntity {
 
     @NotNull
     @Column(name = "last_modification_date")
-    @Temporal(TemporalType.DATE)
-    private Date lastModificationDate;
+    private LocalDate lastModificationDate;
 }

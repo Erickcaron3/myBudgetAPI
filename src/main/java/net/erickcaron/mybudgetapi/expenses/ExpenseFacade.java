@@ -3,8 +3,9 @@ package net.erickcaron.mybudgetapi.expenses;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import net.erickcaron.mybudgetapi.CreateExpenseLogic;
-import net.erickcaron.mybudgetapi.FindAllExpensesLogic;
+import net.erickcaron.mybudgetapi.logic.CreateExpenseLogic;
+import net.erickcaron.mybudgetapi.logic.FindAllExpensesLogic;
+import net.erickcaron.mybudgetapi.logic.UpdateExpensesLogic;
 import net.erickcaron.mybudgetapi.exception.ExpenseNotFoundException;
 import net.erickcaron.mybudgetapi.expenses.entity.ExpenseEntity;
 import net.erickcaron.mybudgetapi.expenses.request.CreateExpenseRequest;
@@ -17,9 +18,6 @@ import net.erickcaron.mybudgetapi.expenses.repository.ExpenseRepository;
 import net.erickcaron.mybudgetapi.utils.ExpenseEntityGenerator;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.Optional;
-
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -30,6 +28,8 @@ public class ExpenseFacade implements ExpenseAPI {
     private final FindExpenseResponseMapper findExpenseResponseMapper;
     private final ExpenseEntityGenerator expenseEntityGenerator;
     private final FindAllExpensesLogic findAllExpensesLogic;
+    private final UpdateExpensesLogic updateExpensesLogic;
+
 
 
     @Override
@@ -56,27 +56,8 @@ public class ExpenseFacade implements ExpenseAPI {
     @SneakyThrows
     @Override
     public void updateById(String id, UpdateExpenseRequest updateExpenseRequest) {
-        ExpenseEntity expenseToSave = expenseRepository.findById(Long.valueOf(id))
-                .map(expenseEntity -> buildExpenseEntityToSave(expenseEntity, updateExpenseRequest))
-                .orElseThrow(
-                        () -> new ExpenseNotFoundException("There is no expense with requested id: " + id));
+        updateExpensesLogic.updateById(id,updateExpenseRequest);
 
-        expenseRepository.save(expenseToSave);
-
-
-    }
-
-    private ExpenseEntity buildExpenseEntityToSave(ExpenseEntity incomingEntity, UpdateExpenseRequest source) {
-        return ExpenseEntity.builder()
-                .id(incomingEntity.getId())
-                .amount(source.getAmount())
-                .currency(source.getCurrency())
-                .shop(source.getShop())
-                .comment(Optional.of(source).map(UpdateExpenseRequest::getComment).orElse(""))
-                .documentNumber(source.getDocumentNumber())
-                .coverageFrom(source.getCoverageFrom())
-                .coverageTo(source.getCoverageTo())
-                .build();
     }
 
     @SneakyThrows

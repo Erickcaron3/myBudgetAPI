@@ -4,6 +4,7 @@ import net.erickcaron.mybudgetapi.expenses.entity.ExpenseEntity;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.*;
 
 @Component
@@ -29,8 +30,8 @@ public class ExpenseEntityGenerator {
                 .shop(generateShop())
                 .comment("This is a comment")
                 .documentNumber("1223456")
-                .coverageFrom(new GregorianCalendar(2023,01,01).getTime())
-                .coverageTo(new GregorianCalendar(2023,01,31).getTime())
+                .coverageFrom(LocalDate.now())
+                .coverageTo(LocalDate.now())
                 .build();
     }
 

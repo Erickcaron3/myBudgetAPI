@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -29,8 +29,8 @@ class CreateExpenseResponseMapperTest {
                 .shop("Carrefour")
                 .comment("Shopping in carrefour")
                 .documentNumber("123456")
-                .coverageFrom(new GregorianCalendar(2023,01,01).getTime())
-                .coverageFrom(new GregorianCalendar(2023,01,31).getTime())
+                .coverageFrom(LocalDate.now())
+                .coverageFrom(LocalDate.now())
                 .build();
         //when
         CreateExpenseResponse createExpenseResponse = createExpenseResponseMapper.convert(expense);
